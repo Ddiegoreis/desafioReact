@@ -1,0 +1,26 @@
+.containerTitle {
+    display: flex;
+    flex: 1px;
+    width: 100%;
+    height: 6rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerTitle > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+}
+
+.containerTitle > span > span.borderTitle {
+    position: absolute;
+    bottom: 0;
+    background: #530bc9;
+    width: 100px;
+    height: 4px;
+    border-radius: 4px;
+}
