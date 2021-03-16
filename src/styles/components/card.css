@@ -1,8 +1,7 @@
 .card {
-	width: 300px;
 	display: grid;
 	grid-template-columns: 300px;
-	grid-template-rows: 210px 210px 80px;
+	grid-template-rows: 250px 350px 80px;
 	grid-template-areas: 'image' 'text' 'stats';
 	border-radius: 18px;
 	background: white;
@@ -72,4 +71,11 @@
 .card {
 	cursor: pointer;
 	margin: 30px;
+}
+
+.highcharts-title {
+    fill: #434348;
+    font-weight: bold;
+	font-size: 3em;
+	font-family: 'Roboto';
 }

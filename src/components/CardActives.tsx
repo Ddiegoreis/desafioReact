@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 
 import '../styles/components/card.css'
 
@@ -23,6 +26,46 @@ interface CardProps {
 }
 
 export function Card(props: CardProps) {
+	const options = {
+		title: {
+			text: 'Propriedades',
+			fontFamily: 'Roboto',
+		},
+		colors: ['#530bc9', '#2f0870', '#6b088a'],
+		chart: {
+			height: 200,
+		},
+		legend: {
+			// layout: 'horizontal', // default
+			itemDistance: 50,
+		},
+		series: [
+			{
+				type: 'column',
+				name: 'Saúde',
+				data: [props.healthScore],
+			},
+			{
+				type: 'column',
+				name: 'Total de Coletas',
+				data: [
+					Math.floor(
+						props.metrics
+							.totalCollectsUptime
+					),
+				],
+			},
+			{
+				type: 'column',
+				name: 'Horas de coleta',
+				data: [props.metrics.totalUptime],
+			},
+		],
+		xAxis: {
+			categories: ['Total'],
+		},
+	}
+
 	const [currentStatus, setCurrentStatus] = useState('')
 
 	useEffect(() => {
@@ -39,6 +82,9 @@ export function Card(props: CardProps) {
 
 			case 'inDowntime':
 				text = 'Em Parada'
+				break
+			default:
+				text = 'N/I'
 				break
 		}
 
@@ -58,20 +104,11 @@ export function Card(props: CardProps) {
 				<span className='model'>{props.model}</span>
 				<h2>{props.name}</h2>
 				<p>Status: {currentStatus}</p>
-				<p>% Saúde: {props.healthScore}%</p>
 				<p>
 					Sensores:{' '}
 					{props.sensors.map(
 						(sensor) => `${sensor}`
 					)}
-				</p>
-				<p>
-					Total de Coletas:{' '}
-					{props.metrics.totalCollectsUptime}
-				</p>
-				<p>
-					Horas de Coletas:{' '}
-					{props.metrics.totalUptime.toFixed(0)}
 				</p>
 				<p>
 					Ultima Coleta:{' '}
@@ -80,6 +117,11 @@ export function Card(props: CardProps) {
 						10
 					)}
 				</p>
+
+				<HighchartsReact
+					highcharts={Highcharts}
+					options={options}
+				/>
 			</div>
 			<div className='cardStats'>
 				<div className='stat'>
